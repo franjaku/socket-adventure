@@ -79,7 +79,12 @@ class Server(object):
         :return: str
         """
 
-        # TODO: YOUR CODE HERE
+        return [
+            "You are in the room with the white wallpaper",
+            "You are in the room with the green wallpaper",
+            "You are in the room with the brown wallpaper",
+            "You are in the room with the mauve wallpaper"
+        ][room_number]
 
         pass
 
@@ -150,7 +155,7 @@ class Server(object):
         :param argument: str
         :return: None
         """
-
+        self.output_buffer = 'You say, {}'.format(argument)
         # TODO: YOUR CODE HERE
 
         pass
@@ -167,9 +172,8 @@ class Server(object):
         :return: None
         """
 
-        # TODO: YOUR CODE HERE
-
-        pass
+        self.done = True
+        self.output_buffer = "Goodbye!"
 
     def route(self):
         """
@@ -197,9 +201,7 @@ class Server(object):
         :return: None 
         """
 
-        # TODO: YOUR CODE HERE
-
-        pass
+        self.client_connection.sendall(b"Ok! " + self.output_buffer.encode() + b"\n")
 
     def serve(self):
         self.connect()
