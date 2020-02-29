@@ -113,9 +113,12 @@ class Server(object):
         :return: None 
         """
 
-        # TODO: YOUR CODE HERE
+        recieved = b''
+        while b'\n' not in recieved:
+            recieved += self.client_connection.recv(16)
 
-        pass
+        self.input_buffer = recieved.decode().strip()
+
 
     def move(self, argument):
         """
