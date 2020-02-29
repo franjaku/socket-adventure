@@ -72,7 +72,7 @@ class Server(object):
         For any room_number in 0, 1, 2, 3, return a string that "describes" that
         room.
 
-        Ex: `self.room_number(1)` yields "Brown wallpaper covers the walls, bathing
+        Ex: `self.room_description(1)` yields "Brown wallpaper covers the walls, bathing
         the room in warm light reflected from the half-drawn curtains."
 
         :param room_number: int
@@ -85,8 +85,6 @@ class Server(object):
             "You are in the room with the brown wallpaper",
             "You are in the room with the mauve wallpaper"
         ][room_number]
-
-        pass
 
     def greet(self):
         """
@@ -119,7 +117,6 @@ class Server(object):
 
         self.input_buffer = recieved.decode().strip()
 
-
     def move(self, argument):
         """
         Moves the client from one room to another.
@@ -140,10 +137,20 @@ class Server(object):
         :param argument: str
         :return: None
         """
+        options = {0: {west: 1,
+                       north: 3,
+                       east: 2},
+                   1: {east: 0},
+                   2: {west: 0},
+                   3: {south: 0}}
 
-        # TODO: YOUR CODE HERE
+        try:
+            new_room = options[self.room][argument]
+            self.room = new_room
+        except KeyError:
+            pass
 
-        pass
+        self.output_buffer = self.room_description(self.room)
 
     def say(self, argument):
         """
